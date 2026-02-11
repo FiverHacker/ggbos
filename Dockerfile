@@ -1,19 +1,13 @@
-# Use the latest Ubuntu image
-FROM ubuntu:latest
+FROM python:3.12-slim
 
-# Update and install required packages
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip
-
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
 # Install JupyterLab
-RUN pip3 install jupyterlab
+RUN pip install --no-cache-dir jupyterlab
 
-# Expose port 8080
+# Expose port
 EXPOSE 8080
 
-# Start JupyterLab on port 8080 without authentication
+# Start JupyterLab (NO TOKEN)
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8080", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
